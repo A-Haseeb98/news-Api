@@ -2,14 +2,15 @@ var search = document.getElementById("searchRes");
 var news = document.getElementById("main");
 
 function getData() {
-  console.log(search.value)
+  news.innerHTML = ''
 
   fetch(
     `https://newsapi.org/v2/everything?q=${search.value}&from=2021-06-24&sortBy=publishedAt&apiKey=1b712f6e3cdf4c4fa227b9ea09482428`
   )
     .then((response) => response.json())
     .then((json) => setData(json));
-}
+    search.value = ''
+  }
 function setData(data) {
   console.log(data);
 
