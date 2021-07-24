@@ -1,15 +1,20 @@
-var news = document.getElementById('main')
+var search = document.getElementById("searchRes");
+var news = document.getElementById("main");
 
-fetch('https://newsapi.org/v2/everything?q=imran-Khan&from=2021-06-20&sortBy=publishedAt&apiKey=314b1e059fcd4cf8901f53490a1ed14e')
-  .then(response => response.json())
-  .then(json => setData(json))
+function getData() {
+  console.log(search.value)
 
-  function setData(data){
-    console.log(data)
+  fetch(
+    `https://newsapi.org/v2/everything?q=${search.value}&from=2021-06-24&sortBy=publishedAt&apiKey=1b712f6e3cdf4c4fa227b9ea09482428`
+  )
+    .then((response) => response.json())
+    .then((json) => setData(json));
+}
+function setData(data) {
+  console.log(data);
 
-    for(var i=0; i<data.articles.length; i++){
-    
-     let card = `<div class="card" style="width: 18rem;">
+  for (var i = 0; i < data.articles.length; i++) {
+    let card = `<div class="card" style="width: 18rem;">
         <img class="card-img-top" src="${data.articles[i].urlToImage}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">${data.articles[i].title}</h5>
@@ -21,9 +26,7 @@ fetch('https://newsapi.org/v2/everything?q=imran-Khan&from=2021-06-20&sortBy=pub
           <li class="list-group-item">Source: ${data.articles[i].source.name}</li>
         </ul>
         
-      </div>`
-        news.innerHTML += card
-    }
+      </div>`;
+    news.innerHTML += card;
   }
-
-  
+}
